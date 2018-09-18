@@ -6,19 +6,17 @@
 
 <body>
     <header>
-        <h1>Ayy, makin some sales, heres ur locations bubbo</h1>
+        <h1>Ayy, makin some sales, heres ur locations Pattyboiii</h1>
     </header>
 
     <div class="displayLocations">
         <div>
             <ul>
                 <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
             </ul>
         </div>
+
+        
     </div>
 
     <footer>
@@ -39,60 +37,142 @@
             avgCookiePer: 6.3,
             openTime: 6,
             closeTime: 21,
-
-            hoursAmPm: function() {
-                var hours = [];
-                for (var i = openTime; i < closeTime; i++) {
-                    hours.push(ampm[i]);
-                    console.log('location open at ' + ampm[i]);
-                }
-                console.log('all hours location is open: ' + hours);
-                return hours;
-
+            hrCustomers: function() {
+                var hrCust = Math.floor(Math.random() * (this.maxCustomers - this.minCustomers)) + this.minCustomers;
+                return hrCust;
             },
+            allHours: hoursAmPm,
+            record: simPurchaseRecord,
+            totCookies: totalCookies
 
-            simHourCust: function() {
-                var custCount = Math.floor(Math.random() * (maxCustomers - minCustomers)) + minCustomers;
-                console.log('hour\'s customers simmed: ' + custCount);
-                return custCount;
-            },
-
-            simHourlyCookies: function() {
-                var hrCookies = simHourCust() * avgCookiePer;
-                console.log('hour\'s cookies simmed: ' + hrCookies);
-                return hrCookies;
-            },
-            
-            daysPurchases: function() {
-                var daysPurchases = [];
-                for (var i = openTime; i < closeTime; i++) {
-                    purchases.push(simHourlyCookies());
-                }
-                return daysPurchases;
-            },
-
-            totalCookies: function(daysPurchases) {
-                var sum = 0;
-                for (var i = 0; i < daysPurchases().length; i++) {
-                    sum += daysPurchases()[i];
-                }
-                return sum;
-            },
-
-            hourlyTable: function() {
-                var hrTable = [hoursAmPm(),daysPurchases()];
-                console.log('hrtable is ' + hrTable);
-                return hrTable;
-            },
-
-            sumTable: function() {
-                var finTable = hourlyTable();
-                finTable[0].push('Total');
-                finTable[1].push(totalCookies(finTable[1]));
-                return finTable;
-            },
         }
 
+        var seaTacAirPort = {
+            minCustomers: 3,
+            maxCustomers: 24,
+            avgCookiePer: 1.2,
+            openTime: 6,
+            closeTime: 21,
+            hrCustomers: function() {
+                var hrCust = Math.floor(Math.random() * (this.maxCustomers - this.minCustomers)) + this.minCustomers;
+                return hrCust;
+            },
+            allHours: hoursAmPm,
+            record: simPurchaseRecord,
+            totCookies: totalCookies
+        }
+
+        var seattleCenter = {
+            minCustomers: 11,
+            maxCustomers: 38,
+            avgCookiePer: 3.7,
+            openTime: 6,
+            closeTime: 21,
+            hrCustomers: function() {
+                var hrCust = Math.floor(Math.random() * (this.maxCustomers - this.minCustomers)) + this.minCustomers;
+                return hrCust;
+            },
+            allHours: hoursAmPm,
+            record: simPurchaseRecord,
+            totCookies: totalCookies
+        }
+
+        var capitolHill = {
+            minCustomers: 20,
+            maxCustomers: 38,
+            avgCookiePer: 2.3,
+            openTime: 6,
+            closeTime: 21,
+            hrCustomers: function() {
+                var hrCust = Math.floor(Math.random() * (this.maxCustomers - this.minCustomers)) + this.minCustomers;
+                return hrCust;
+            },
+            allHours: hoursAmPm,
+            record: simPurchaseRecord,
+            totCookies: totalCookies
+        }
+
+        var alki = {
+            minCustomers: 2,
+            maxCustomers: 16,
+            avgCookiePer: 4.6,
+            openTime: 6,
+            closeTime: 21,
+            hrCustomers: function() {
+                var hrCust = Math.floor(Math.random() * (this.maxCustomers - this.minCustomers)) + this.minCustomers;
+                return hrCust;
+            },
+            allHours: hoursAmPm,
+            record: simPurchaseRecord,
+            totCookies: totalCookies
+        }
+        
+        
+
+      
+        //creates array of open hours in am/pm format
+        function hoursAmPm() {
+            var hours = [];
+            for (var i = this.openTime; i < this.closeTime; i++) {
+                hours.push(ampm[i]);
+            }
+            console.log('hoursAmPM returns: ' + hours);
+            return hours;
+        }
+
+
+        // simulates number of cookies purchased in an hour based on hourly customer values inherited from location object.
+        function simHourlyCookies(simMeth, avgCook) {
+            var hourCookies = Math.floor(simMeth * avgCook);
+            return hourCookies;
+        }
+        
+        // returns array of simulated cookie purchase records per hour using simHourlyCookies() function, for all
+        // hours the location is open
+        function simPurchaseRecord() {
+            var purchaseRecord = [];
+            var simMethod;
+            var avgCookie = this.avgCookiePer;
+            console.log('simPurchaseRecord called. openTime is ' + this.openTime + ', closeTime is ' + this.closeTime);
+            for (var i = this.openTime; i < this.closeTime; i++) {
+                simMethod = this.hrCustomers();
+                purchaseRecord.push(simHourlyCookies(simMethod, avgCookie));
+            }
+            console.log('day\'s purchaseRecord simmed: ' + purchaseRecord);
+            return purchaseRecord;
+        }
+
+        // accepts array of day's hourly cookie purchase records and returns total number of cookies purchased on that day
+        function totalCookies () {
+            var cookSum = 0;
+            var cookieTally = this.record();
+            console.log('cookieTally is ' + cookieTally);
+            for (var i = 0; i < cookieTally.length; i++) {
+                console.log('inside totalCookies for loop');
+                cookSum += cookieTally[i];
+            }
+            console.log('total cookies: ' + cookSum);
+            return cookSum;
+        }
+
+        function makeList () {
+            var locationLists = document.getElementsByClassName("displayLocations");
+            for (var i = 0; i < allLocations.length; i++) {
+                var newLoc = document.createElement('div');
+                var newLocName = document.createTextNode(allLocations[i]);
+                
+                newLoc.appendChild(newLocName);
+                locationLists.appendChild();
+        
+            }
+            
+        }
+
+        
+        
+
+        
+        
     
     </script>
 

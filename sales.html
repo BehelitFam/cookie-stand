@@ -9,7 +9,93 @@
         <h1>Ayy, makin some sales, heres ur locations bubbo</h1>
     </header>
 
-    <div class="allLocations"></div>
+    <div class="displayLocations">
+        <div>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+
+    </footer>
+
+    <script>
+        var ampm = ['12am', '1am', '2am', '3am', '4am', '5am', '6am', '7am', '8am', '9am', '10am', '11am', '12pm',
+                    '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm', '10pm', '11pm'
+        ];
+
+        var allLocations = ['firstNPike', 'seaTacAirPort', 'seattleCenter', 'capitolHill', 'alki'];
+
+
+        var firstNPike = {
+            minCustomers: 23,
+            maxCustomers: 65,
+            avgCookiePer: 6.3,
+            openTime: 6,
+            closeTime: 21,
+
+            hoursAmPm: function() {
+                var hours = [];
+                for (var i = openTime; i < closeTime; i++) {
+                    hours.push(ampm[i]);
+                    console.log('location open at ' + ampm[i]);
+                }
+                console.log('all hours location is open: ' + hours);
+                return hours;
+
+            },
+
+            simHourCust: function() {
+                var custCount = Math.floor(Math.random() * (maxCustomers - minCustomers)) + minCustomers;
+                console.log('hour\'s customers simmed: ' + custCount);
+                return custCount;
+            },
+
+            simHourlyCookies: function() {
+                var hrCookies = simHourCust() * avgCookiePer;
+                console.log('hour\'s cookies simmed: ' + hrCookies);
+                return hrCookies;
+            },
+            
+            daysPurchases: function() {
+                var daysPurchases = [];
+                for (var i = openTime; i < closeTime; i++) {
+                    purchases.push(simHourlyCookies());
+                }
+                return daysPurchases;
+            },
+
+            totalCookies: function(daysPurchases) {
+                var sum = 0;
+                for (var i = 0; i < daysPurchases().length; i++) {
+                    sum += daysPurchases()[i];
+                }
+                return sum;
+            },
+
+            hourlyTable: function() {
+                var hrTable = [hoursAmPm(),daysPurchases()];
+                console.log('hrtable is ' + hrTable);
+                return hrTable;
+            },
+
+            sumTable: function() {
+                var finTable = hourlyTable();
+                finTable[0].push('Total');
+                finTable[1].push(totalCookies(finTable[1]));
+                return finTable;
+            },
+        }
+
+    
+    </script>
+
 </body>
 
 

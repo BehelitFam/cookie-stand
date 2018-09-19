@@ -147,7 +147,6 @@ function renderTable() {
 
     //table footer
 }
-    
 
 
 var firstAndPike = new ShopLocation('1st and Pike', 23, 65, 6.3);

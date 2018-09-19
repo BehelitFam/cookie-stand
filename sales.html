@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Dis da sales page</title>
+    <title>Sales paaaage</title>
+
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="salmonStyle.css" />
 </head>
 
 <body>
     <header>
-        <h1>Ayy, makin some sales, heres ur locations Pattyboiii</h1>
+        <h1>Ayy, makin some sales</h1>
     </header>
 
     <div class="displayLocations">
-        <div>
-            <ul>
-                <li></li>
-            </ul>
-        </div>
-
+        <h2>Our Locations</h2>
         
     </div>
 
@@ -23,158 +21,8 @@
 
     </footer>
 
-    <script>
-        var ampm = ['12am', '1am', '2am', '3am', '4am', '5am', '6am', '7am', '8am', '9am', '10am', '11am', '12pm',
-                    '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm', '10pm', '11pm'
-        ];
-
-        var allLocations = ['firstNPike', 'seaTacAirPort', 'seattleCenter', 'capitolHill', 'alki'];
-
-
-        var firstNPike = {
-            minCustomers: 23,
-            maxCustomers: 65,
-            avgCookiePer: 6.3,
-            openTime: 6,
-            closeTime: 21,
-            hrCustomers: function() {
-                var hrCust = Math.floor(Math.random() * (this.maxCustomers - this.minCustomers)) + this.minCustomers;
-                return hrCust;
-            },
-            allHours: hoursAmPm,
-            record: simPurchaseRecord,
-            totCookies: totalCookies
-
-        }
-
-        var seaTacAirPort = {
-            minCustomers: 3,
-            maxCustomers: 24,
-            avgCookiePer: 1.2,
-            openTime: 6,
-            closeTime: 21,
-            hrCustomers: function() {
-                var hrCust = Math.floor(Math.random() * (this.maxCustomers - this.minCustomers)) + this.minCustomers;
-                return hrCust;
-            },
-            allHours: hoursAmPm,
-            record: simPurchaseRecord,
-            totCookies: totalCookies
-        }
-
-        var seattleCenter = {
-            minCustomers: 11,
-            maxCustomers: 38,
-            avgCookiePer: 3.7,
-            openTime: 6,
-            closeTime: 21,
-            hrCustomers: function() {
-                var hrCust = Math.floor(Math.random() * (this.maxCustomers - this.minCustomers)) + this.minCustomers;
-                return hrCust;
-            },
-            allHours: hoursAmPm,
-            record: simPurchaseRecord,
-            totCookies: totalCookies
-        }
-
-        var capitolHill = {
-            minCustomers: 20,
-            maxCustomers: 38,
-            avgCookiePer: 2.3,
-            openTime: 6,
-            closeTime: 21,
-            hrCustomers: function() {
-                var hrCust = Math.floor(Math.random() * (this.maxCustomers - this.minCustomers)) + this.minCustomers;
-                return hrCust;
-            },
-            allHours: hoursAmPm,
-            record: simPurchaseRecord,
-            totCookies: totalCookies
-        }
-
-        var alki = {
-            minCustomers: 2,
-            maxCustomers: 16,
-            avgCookiePer: 4.6,
-            openTime: 6,
-            closeTime: 21,
-            hrCustomers: function() {
-                var hrCust = Math.floor(Math.random() * (this.maxCustomers - this.minCustomers)) + this.minCustomers;
-                return hrCust;
-            },
-            allHours: hoursAmPm,
-            record: simPurchaseRecord,
-            totCookies: totalCookies
-        }
+    <script src="salesCalc.js"></script>
         
-        
-
-      
-        //creates array of open hours in am/pm format
-        function hoursAmPm() {
-            var hours = [];
-            for (var i = this.openTime; i < this.closeTime; i++) {
-                hours.push(ampm[i]);
-            }
-            console.log('hoursAmPM returns: ' + hours);
-            return hours;
-        }
-
-
-        // simulates number of cookies purchased in an hour based on hourly customer values inherited from location object.
-        function simHourlyCookies(simMeth, avgCook) {
-            var hourCookies = Math.floor(simMeth * avgCook);
-            return hourCookies;
-        }
-        
-        // returns array of simulated cookie purchase records per hour using simHourlyCookies() function, for all
-        // hours the location is open
-        function simPurchaseRecord() {
-            var purchaseRecord = [];
-            var simMethod;
-            var avgCookie = this.avgCookiePer;
-            console.log('simPurchaseRecord called. openTime is ' + this.openTime + ', closeTime is ' + this.closeTime);
-            for (var i = this.openTime; i < this.closeTime; i++) {
-                simMethod = this.hrCustomers();
-                purchaseRecord.push(simHourlyCookies(simMethod, avgCookie));
-            }
-            console.log('day\'s purchaseRecord simmed: ' + purchaseRecord);
-            return purchaseRecord;
-        }
-
-        // accepts array of day's hourly cookie purchase records and returns total number of cookies purchased on that day
-        function totalCookies () {
-            var cookSum = 0;
-            var cookieTally = this.record();
-            console.log('cookieTally is ' + cookieTally);
-            for (var i = 0; i < cookieTally.length; i++) {
-                console.log('inside totalCookies for loop');
-                cookSum += cookieTally[i];
-            }
-            console.log('total cookies: ' + cookSum);
-            return cookSum;
-        }
-
-        function makeList () {
-            var locationLists = document.getElementsByClassName("displayLocations");
-            for (var i = 0; i < allLocations.length; i++) {
-                var newLoc = document.createElement('div');
-                var newLocName = document.createTextNode(allLocations[i]);
-                
-                newLoc.appendChild(newLocName);
-                locationLists.appendChild();
-        
-            }
-            
-        }
-
-        
-        
-
-        
-        
-    
-    </script>
 
 </body>
 

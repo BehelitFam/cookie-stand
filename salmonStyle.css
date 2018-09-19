@@ -1,22 +1,61 @@
 main {
-    background: rgb(148, 76, 76);
-    color: rgb(231, 196, 121);
-    margin: 5px;
-    padding: 5px;
+    position: relative;
 }
+
+body {
+    background: rgb(148, 76, 76);
+    color: rgb(204, 196, 178);
+    display: inline-block;
+    padding: none;
+    height: 100%;
+    width: 100%;
+}
+
 
 header {
-
+    background: darkslategray;
+    border: 5px solid grey;
+    display: inline-block;
+    margin: none;
+    text-align: center;
+    width: 100%;
 }
 
-div {
-
-}
-
-.allLocations {
-
-}
-
-footer {
+h1 {
     
 }
+
+
+div {
+    border: 1px solid grey;
+    margin: 5px;
+}
+
+table, tr, th, td {
+    border: 2px solid black;
+    /* color: darkslategrey; */
+}
+
+table {
+    margin: 10px;
+}
+
+th {
+    background: rgb(180, 180, 180);
+}
+
+th, td {
+    height: 15px;
+    width: 40px;
+}
+
+.displayLocations {
+    background: darkslategrey;;
+    border: 5px solid grey;
+}
+
+.location {
+    background: rgb(228, 228, 207);
+    color: darkslategray;
+}
+

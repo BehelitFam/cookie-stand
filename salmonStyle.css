@@ -5,7 +5,7 @@ main {
 body {
     background: rgb(148, 76, 76);
     background-image: url("salmonBackground.jpg");
-    color: rgb(204, 196, 178);
+    color: rgb(231, 223, 203);
     display: inline-block;
     margin: none;
     padding: none;
@@ -76,13 +76,13 @@ th, td {
     border: 5px solid grey;
 }
 
-.location {
+.tableDiv {
     background: rgba(228, 228, 207, 0.705);
     color: darkslategray;
 }
 
 .totaltotal {
     color: white;
-    background-color: darkslategray;
+    background-color: rgb(103, 134, 134);
 }
 

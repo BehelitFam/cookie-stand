@@ -1,14 +1,21 @@
 'use strict';
 
-//Constructor function for ShopLocations
+
+
+
+//global variable to store the location of the table we will populate
+var elTable;
+
+
+// constructor function for ShopLocations
 function ShopLocation(locationName, minCustomers, maxCustomers, avgPurchase) {
-    this.locationName = locationName;
-    this.minCustomers = minCustomers;
-    this.maxCustomers = maxCustomers;
-    this.avgPurchase = avgPurchase;
+    this.locationName = '' + locationName;
+    this.minCustomers = parseInt(minCustomers, 10);
+    this.maxCustomers = parseInt(maxCustomers, 10);
+    this.avgPurchase = parseInt(avgPurchase, 10);
     this.hrlyCustEstimate = [];
-    this.simmed = false;
     ShopLocation.allLocations.push(this);
+    this.simHourlyCustomers();
 }
 
 ShopLocation.allLocations = [];
@@ -16,7 +23,6 @@ ShopLocation.allLocations = [];
 //generates randomized number of customers using this location's minimum and maximum customer properties
 ShopLocation.prototype.randCustomers = function() {
     var hrCust = Math.ceil(Math.random() * (this.maxCustomers - this.minCustomers)) + this.minCustomers;
-    console.log('randomized hour\'s customers as ' + hrCust);
     return hrCust;
 }
 
@@ -24,54 +30,38 @@ ShopLocation.prototype.randCustomers = function() {
 //returns and stores this information in the hrlyCustEstimate property.
 ShopLocation.prototype.simHourlyCustomers = function() {
     var randCustAdd = 0;
-    console.log('entered simHrCust')
     for (var i = 0; i < 15; i++) {
         randCustAdd = this.randCustomers();
         this.hrlyCustEstimate.push(randCustAdd);
-        console.log(this.hrlyCustEstimate);
     }
-    console.log('simHrCust returns ' + this.hrlyCustEstimate);
-    this.simmed = true;
-    return this.hrlyCustEstimate;
 }
 
-//Calls .simHourlyCustomers function property to generate and store estimate of hourly customers 
-// if it has not already been created. 
-//Uses hourly customer estimate and average number of cookies purchased at this location to generate and return
+
+// Uses hourly customer record and average number of cookies purchased at this location to generate and return
 // a per-hour estimate of cookie purchases.
 ShopLocation.prototype.simHourlyCookies = function() {
-    if (!this.simmed) {
-        console.log('no customer estimate exists. simming customers');
-        this.simHourlyCustomers();
-    }
     var randCookAdd = 0;
     var hrlyCookEstimate = [];
     for (var i = 0; i < 15; i++) {
-        console.log(this.avgPurchase);
-        console.log(this.hrlyCustEstimate[i]);
         randCookAdd = Math.ceil(this.avgPurchase * this.hrlyCustEstimate[i]);
-        console.log('added to cookie array: ' + randCookAdd);
         hrlyCookEstimate.push(randCookAdd);
-        console.log(hrlyCookEstimate);
     }
-    console.log('simhrcook returns ' + hrlyCookEstimate);
     return hrlyCookEstimate;
 }
 
-//generates, stores and returns estimated daily total of cookies purchased
+// generates, stores and returns estimated daily total of cookies purchased
 ShopLocation.prototype.totalCookies = function() {
     var total = 0;
     var cookieTally = this.simHourlyCookies();
     for (var i = 0; i < cookieTally.length; i++) {
         total += cookieTally[i];
-        console.log('total so far is ' + total);
     }
     console.log('final cookie total is ' + total);
     return total;
 }
 
-//renders location's row and returns row element
-ShopLocation.prototype.renderRow = function() {
+// renders location's row and returns row element
+ShopLocation.prototype.makeRow = function() {
     var elRow = document.createElement('tr');
 
     var elLocRowHeader = document.createElement('th');
@@ -91,34 +81,43 @@ ShopLocation.prototype.renderRow = function() {
     return elRow;
 }
 
-//renders table
+// renders a table containing hourly cookie purchase data for each store location, with each row containing
+// a location's hourly cookie purchase data and totals.
+// also renders footer row of hourly totals for cookie purchases across all store locations.
 function renderTable() {
     var elLocList = document.getElementsByClassName('displayLocations').item(0);
     var thisLoc = this;
 
-    var elLocation = document.createElement('div');
-    elLocation.className = 'location';
-    elLocList.appendChild(elLocation);
+    var elTableDiv = document.createElement('div');
+    elTableDiv.className = 'location';
+    elLocList.appendChild(elTableDiv);
 
-    var elLocH = document.createElement('h2');
-    elLocH.className = 'locationHeader';
-    elLocH.textContent = 'Cookies needed by location each day';
-    elLocation.appendChild(elLocH);
+    var elLocationH2 = document.createElement('h2');
+    elLocationH2.className = 'locationHeader';
+    elLocationH2.textContent = 'Cookies needed by location each day';
+    elTableDiv.appendChild(elLocationH2);
 
-    var elTable = document.createElement('table');
-    elTable.className = 'cookieTable';
-    elLocation.appendChild(elTable);
+    elTable = document.createElement('table');
+    elTableDiv.appendChild(elTable);
 
+    renderHeader();
+    renderBody();
+    renderFooter();
+
+}
+
+// renders a header for our location data table that labels each column.
+function renderHeader() {
     var elTableHeader = document.createElement('thead');
     elTable.appendChild(elTableHeader);
 
     var elTableHeadRow = document.createElement('tr');
     elTableHeader.appendChild(elTableHeadRow);
 
-    //table header
     var elTh = document.createElement('th');
     elTh.textContent = 'Location';
     elTableHeadRow.appendChild(elTh);
+
     var hr = 6;
     var ampm = 'am';
     for (var i = 0; i < 15; i++) {
@@ -135,25 +134,91 @@ function renderTable() {
     var elThTotal = document.createElement('th');
     elThTotal.textContent = 'Day\'s Total';
     elTableHeadRow.appendChild(elThTotal);
+}
 
-    //table body
+// populates our location purchase data table with rows for each location, containing their hourly
+// purchase data and daily totals.
+function renderBody() {
     var elTableBody = document.createElement('tbody');
     elTable.appendChild(elTableBody);
 
     for (var i = 0; i < ShopLocation.allLocations.length; i++) {
         console.log('Rendering row: '+ ShopLocation.allLocations[i].locationName);
-        elTableBody.appendChild(ShopLocation.allLocations[i].renderRow());
+        elTableBody.appendChild(ShopLocation.allLocations[i].makeRow());
     }
-
-    //table footer
 }
 
+//returns array of hourly totals of cookies purchased across all locations, including daily total
+function hrlyTotals() {
+    var footVals = [];
+    var hourlyTotal;
+    var allTotal = 0;
+    for (var i = 0; i < 15; i++) {
+        hourlyTotal = 0;
+        for (var j = 0; j < ShopLocation.allLocations.length; j++) {
+            hourlyTotal += ShopLocation.allLocations[j].simHourlyCookies()[i];
+        }
+        footVals.push(hourlyTotal);
+        console.log('hourly total calced as ' + hourlyTotal);
 
+        allTotal += hourlyTotal;
+        console.log('allTotal is now ' + allTotal);
+    }
+    footVals.push(allTotal);
+    console.log('footVals is ' + footVals);
+    return footVals;
+}
+
+// creates a table footer that adds total cookie purchases for each hour across all store locations. 
+function renderFooter() {
+    var elTableFooter = document.createElement('tfoot');
+    elTable.appendChild(elTableFooter);
+
+    var elFootHead = document.createElement('th');
+    elFootHead.textContent = 'Hourly Totals';
+    elTableFooter.appendChild(elFootHead);
+
+    var ftVals = hrlyTotals();
+    console.log('ftVals array is ' + ftVals);
+
+    for (var i = 0; i < 16; i++) {
+        var elTd = document.createElement('td');
+        elTd.textContent = ftVals[i];
+        elTableFooter.appendChild(elTd);
+        console.log('adding to tablefooter: ' + ftVals[i]);
+        if (i === 15) {
+            elTd.classList.add('totaltotal');
+            console.log('totaltotal');
+        }
+    }
+}
+//Location seed
 var firstAndPike = new ShopLocation('1st and Pike', 23, 65, 6.3);
 var seaTacAirport = new ShopLocation('Seatac Airport', 3, 24, 1.2);
 var seattleCenter = new ShopLocation('Seattle Center', 11, 38, 3.7);
 var capitolHill = new ShopLocation('Capitol Hill', 20, 38, 2.3);
 var alki = new ShopLocation('Alki', 2, 16, 4.6);
 
+
+var newLocForm = document.getElementById('addNewLocForm');
+
+//Event function
+function addNewLocation (event) {
+    event.preventDefault();
+    var locName = event.target.locName.value;
+    var mnCust = event.target.mnCust.value;
+    var mxCust = event.target.mxCust.value;
+    var avPur = event.target.avPur.value;
+
+    var newShop = new ShopLocation(locName, mnCust, mxCust, avPur);
+
+    elTable.innerHTML = '';
+    renderTable();
+    newLocForm.reset();
+
+}
+
+//Event listener
+newLocForm.addEventListener('submit', addNewLocation);
 
 renderTable();

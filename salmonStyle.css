@@ -4,6 +4,7 @@ main {
 
 body {
     background: rgb(148, 76, 76);
+    background-image: url("salmonBackGround.jpg");
     color: rgb(204, 196, 178);
     display: inline-block;
     padding: none;
@@ -13,7 +14,7 @@ body {
 
 
 header {
-    background: darkslategray;
+    background: rgba(47, 79, 79, 0.719);
     border: 5px solid grey;
     display: inline-block;
     margin: none;
@@ -25,6 +26,19 @@ h1 {
     
 }
 
+form {
+    background: rgba(47, 79, 79, 0.671);
+    
+}
+
+label {
+    display: inline-block;
+    display: block;
+    margin: 10px;
+    padding: 5px;
+    width: max-content;
+    
+}
 
 div {
     border: 1px solid grey;
@@ -33,6 +47,7 @@ div {
 
 table, tr, th, td {
     border: 2px solid black;
+    text-align: center;
     /* color: darkslategrey; */
 }
 
@@ -50,12 +65,16 @@ th, td {
 }
 
 .displayLocations {
-    background: darkslategrey;;
+    background: rgba(47, 79, 79, 0.671);;
     border: 5px solid grey;
 }
 
 .location {
-    background: rgb(228, 228, 207);
+    background: rgba(228, 228, 207, 0.705);
     color: darkslategray;
+}
+
+.totaltotal {
+    background-color: green;
 }
 

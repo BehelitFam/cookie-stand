@@ -4,9 +4,10 @@ main {
 
 body {
     background: rgb(148, 76, 76);
-    background-image: url("salmonBackGround.jpg");
+    background-image: url("salmonBackground.jpg");
     color: rgb(204, 196, 178);
     display: inline-block;
+    margin: none;
     padding: none;
     height: 100%;
     width: 100%;
@@ -26,12 +27,18 @@ h1 {
     
 }
 
+h2 {
+    margin: 5px;
+}
+
 form {
     background: rgba(47, 79, 79, 0.671);
     
 }
 
 label {
+    background: rgba(47, 79, 79, 0.9);
+    border-radius: 5px;
     display: inline-block;
     display: block;
     margin: 10px;
@@ -56,12 +63,12 @@ table {
 }
 
 th {
-    background: rgb(180, 180, 180);
+    background: rgb(191, 220, 238);
 }
 
 th, td {
-    height: 30px;
-    width: 40px;
+    height: 35px;
+    width: 50px;
 }
 
 .displayLocations {
@@ -75,6 +82,7 @@ th, td {
 }
 
 .totaltotal {
-    background-color: green;
+    color: white;
+    background-color: darkslategray;
 }
 

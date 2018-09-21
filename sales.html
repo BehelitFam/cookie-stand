@@ -10,29 +10,33 @@
 <body>
     <header>
         <h1>Pat the Salesmon</h1>
+        <img src = "salmon.png">
     </header>
-
-    <div class="displayLocations">
-        <h2>Our Locations</h2>
-        
-    </div>
-
-    <div>
-       <form id="addNewLocForm">
-            <fieldset>
-                <legend>Add New Location</legend>
-                <label>Location Name: <input type="text" name="locName" /></label>
-                <label>Minimum Customers Expected: <input type="text" name="mnCust"/></label>
-                <label>Maximum Customers Expected: <input type="text" name="mxCust"/></label>
-                <label>Average Cookie Purchase Size: <input type="text" name="avPur"/></label>
-                <input type="submit" value="Add Location" />
-            </fieldset>
-
-       </form>
-    </div>
-
+    
+    <main>
+        <div class="mainwrapper">
+            <div class="contentBox">
+                <div class="displayLocations">
+                    <!-- Our table will render here-->
+                </div>
+            
+                <div class ="formDiv">
+                    <form id="addNewLocForm">
+                            <fieldset>
+                                <legend>Add New Location</legend>
+                                <label>Location Name: <input type="text" name="locName" /></label>
+                                <label>Minimum Customers Expected: <input type="text" name="mnCust"/></label>
+                                <label>Maximum Customers Expected: <input type="text" name="mxCust"/></label>
+                                <label>Average Cookie Purchase Size: <input type="text" name="avPur"/></label>
+                                <input class ="submitButton" type="submit" value="Add Location" />
+                            </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    
     <footer>
-
     </footer>
 
     <script src="salesCalc.js"></script>

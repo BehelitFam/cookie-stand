@@ -1,61 +1,116 @@
-main {
-    position: relative;
+
+header {
+    background: rgb(47, 79, 79);
+    border-top: 5px solid rgba(150, 147, 147);
+    border-bottom: 5px solid rgba(150, 147, 147);
+    height: 80px;
+    left: 0px;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    z-index: 2;
 }
 
 body {
     background: rgb(148, 76, 76);
     background-image: url("salmonBackground.jpg");
     color: rgb(231, 223, 203);
-    display: inline-block;
-    margin: none;
-    padding: none;
-    height: 100%;
-    width: 100%;
+    padding: 0px;
+    height: 1000px;
 }
 
 
-header {
-    background: rgba(47, 79, 79, 0.719);
-    border: 5px solid grey;
-    display: inline-block;
-    margin: none;
-    text-align: center;
-    width: 100%;
+
+main {
+    display: block;
+    margin: 0px;
+    position: relative;
+    top: 80px;
+    left: -10px;
 }
+
+fieldset {
+    padding: 5px;
+}
+
+
 
 h1 {
-    
+    text-align: center;
 }
 
 h2 {
-    margin: 5px;
+    background: rgba(64, 107, 107, 0.9);
+    border: solid none;
+    border-radius: 5px;
+    color: rgb(235, 231, 222);
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
 }
 
 form {
-    background: rgba(47, 79, 79, 0.671);
-    
+    padding: 5px;
 }
 
 label {
-    background: rgba(47, 79, 79, 0.9);
+    background: rgba(228, 228, 207, 0.705);
+    border: 2px solid black;
     border-radius: 5px;
-    display: inline-block;
+    color: darkslategray;
     display: block;
     margin: 10px;
     padding: 5px;
-    width: max-content;
-    
+    text-align: center;
+    width: min-content;
+}
+
+input.submitButton {
+    background-color: grey;
+    border-radius: 5px;
+    margin-left: 55px;
+
+}
+
+input.submitButton:hover {
+    background-color: salmon;
 }
 
 div {
-    border: 1px solid grey;
-    margin: 5px;
+    display: inline-block;
 }
 
-table, tr, th, td {
+.contentBox {
+    background: rgba(47, 79, 79, 0.671);
+    border: 2px solid rgba(150, 147, 147, 0.829);
+    border-radius: 5px;
+    margin: 10px;
+    padding: 5px;
+    width: 100%;
+}
+
+
+.tableDiv {
+    background: rgba(228, 228, 207, 0.705);
+    border: rgba(228, 228, 207, 0.705);
+    border-radius: 10px;
+    color: darkslategray;
+}
+
+.formDiv {
+    font-size: 10;
+    width: available;
+}
+
+.formDiv, .tableDiv {
+    vertical-align: top;
+}
+
+tr, th, td {
     border: 2px solid black;
+    font-size: 10px;
     text-align: center;
-    /* color: darkslategrey; */
 }
 
 table {
@@ -64,22 +119,19 @@ table {
 
 th {
     background: rgb(191, 220, 238);
+    width: min-content;
+}
+
+
+
+td:hover {
+    background: rgb(231, 162, 162);
 }
 
 th, td {
-    height: 35px;
-    width: 50px;
+    height: 40px;
 }
 
-.displayLocations {
-    background: rgba(47, 79, 79, 0.671);;
-    border: 5px solid grey;
-}
-
-.tableDiv {
-    background: rgba(228, 228, 207, 0.705);
-    color: darkslategray;
-}
 
 .totaltotal {
     color: white;

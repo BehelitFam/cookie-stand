@@ -1,15 +1,20 @@
 'use strict';
 
+
+
+// Array of hours all locations are open. Determines the size of each ShopLocation's hourly purchase arrays and
+// the number of columns of data our location data table will render.
 var openHours = [ '6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm',
  '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'
 ];
 
-//Creates the location data table element and adds the 
+// Creates the table element we will use to render our location data table, and adds a table body and footer to it
+// as children. 
 var elTable = document.createElement('table');
 var elTableBody = makeBaby('tbody', '', elTable);
 var elTableFooter = makeBaby('tfoot', '', elTable);
 
-// constructs a new ShopLocation object using a given name, minimum expected customers, maximum expected customers,
+// Constructs a new ShopLocation object using a given name, minimum expected customers, maximum expected customers,
 // and average number of cookies purchased at this location. When created, will generate and store arrays of expected
 // customers and cookie sales per hour, respectively. 
 function ShopLocation(locationName, minCustomers, maxCustomers, avgPurchase) {
@@ -53,7 +58,7 @@ ShopLocation.prototype.simHourlyCookies = function() {
     }
 }
 
-// generates, stores and returns estimated daily total of cookies purchased
+// Generates, stores and returns estimated daily total of cookies purchased for this ShopLocation
 ShopLocation.prototype.totalCookies = function() {
     var total = 0;
     var cookieTally = this.hrlyCookEstimate;
@@ -63,7 +68,7 @@ ShopLocation.prototype.totalCookies = function() {
     return total;
 }
 
-// makes and returns a child HTML element using given parameters for its type, text content, parent, and optional
+// Creates and returns a child HTML element using given parameters for its type, text content, parent, and optional
 // class name. 
 function makeBaby(elemType, elemContent, parent, className) {
     var el = document.createElement('' + elemType);
@@ -75,7 +80,8 @@ function makeBaby(elemType, elemContent, parent, className) {
     return el;
 }
 
-// renders location's row and returns row element
+// Creates and returns a 'tr' (table row) element that contains the ShopLocation's hourly purchase data and
+// daily purchase total.
 ShopLocation.prototype.makeRow = function() {
     var cookRec = this.hrlyCookEstimate;
     var elRow = document.createElement('tr');
@@ -94,7 +100,7 @@ ShopLocation.prototype.makeRow = function() {
 function renderTable() {
     var elLocList = document.getElementsByClassName('displayLocations').item(0);
     var elTableDiv = makeBaby('div', '', elLocList, 'tableDiv');
-    makeBaby('h2', 'Cookies needed by location, per hour', elTableDiv, 'locationHeader');
+    makeBaby('h2', 'Cookie Sales by Location', elTableDiv, 'locationHeader');
     elTableDiv.appendChild(elTable);
 
     renderHeader();
@@ -102,11 +108,11 @@ function renderTable() {
     renderFooter();
 }
 
-// renders a header for our location data table that labels each column.
+// renders a header for our location data table that hour labels above each column.
 function renderHeader() {
     var elTableHeader = makeBaby('thead', '', elTable);
     var elTableHeadRow = makeBaby('tr', '', elTableHeader);
-    makeBaby('th', 'location', elTableHeadRow);
+    makeBaby('th', 'Location', elTableHeadRow);
     for (var i = 0; i < openHours.length; i++) {
         makeBaby('th', openHours[i], elTableHeadRow, 'hour');
     }
@@ -123,7 +129,8 @@ function renderBody() {
     }
 }
 
-//returns array of hourly totals of cookies purchased across all locations, including daily total
+// Returns array of hourly totals of cookies purchased across all locations, including daily total,
+// using data from all existing ShopLocation objects
 function hrlyTotals() {
     var footVals = [];
     var hourlyTotal;
@@ -144,7 +151,8 @@ function hrlyTotals() {
     return footVals;
 }
 
-// creates a table footer that adds total cookie purchases for each hour across all store locations. 
+// Creates and renders a footer for our location data tablethat adds total cookie purchases for each
+// hour across all store locations. 
 function renderFooter() {
     elTableFooter.innerHTML = '';
     
@@ -152,10 +160,6 @@ function renderFooter() {
     
     var ftVals = hrlyTotals();
     for (var i = 0; i <= openHours.length; i++) {
-        // var elTd = document.createElement('td');
-        // elTd.textContent = ftVals[i];
-        // elTableFooter.appendChild(elTd);
-        console.log('adding to tablefooter: ' + ftVals[i]);
         if (i === openHours.length) {
             makeBaby('td', ftVals[i], elTableFooter, 'totaltotal');
             console.log('totaltotal');
@@ -165,17 +169,18 @@ function renderFooter() {
     }
 }
 
-//Location table seed
+// Location table seed
 var firstAndPike = new ShopLocation('1st and Pike', 23, 65, 6.3);
 var seaTacAirport = new ShopLocation('Seatac Airport', 3, 24, 1.2);
 var seattleCenter = new ShopLocation('Seattle Center', 11, 38, 3.7);
 var capitolHill = new ShopLocation('Capitol Hill', 20, 38, 2.3);
 var alki = new ShopLocation('Alki', 2, 16, 4.6);
 
-
+// Creates reference variable for our input form
 var newLocForm = document.getElementById('addNewLocForm');
 
-//Event function
+// Creates a new location from user form data, adds it to our location data table, and then re-renders the table
+// with adjusted totals footer.
 function addNewLocation (event) {
     event.preventDefault();
     var locName = event.target.locName.value;
@@ -183,12 +188,12 @@ function addNewLocation (event) {
     var mxCust = event.target.mxCust.value;
     var avPur = event.target.avPur.value;
 
-    new ShopLocation(locName, mnCust, mxCust, avPur);
-
-    renderBody();
-    renderFooter();
+    if (locName && mnCust && mxCust && avPur) {
+        new ShopLocation(locName, mnCust, mxCust, avPur);
+        renderBody();
+        renderFooter();
+    }
     newLocForm.reset();
-
 }
 
 //Event listener

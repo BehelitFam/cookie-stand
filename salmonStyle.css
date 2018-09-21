@@ -1,11 +1,9 @@
-
 header {
     background: rgb(47, 79, 79);
-    border-top: 5px solid rgba(150, 147, 147);
-    border-bottom: 5px solid rgba(150, 147, 147);
-    height: 80px;
-    left: 0px;
+    border-top: 2px solid rgba(150, 147, 147);
+    border-bottom: 2px solid rgba(150, 147, 147);
     position: fixed;
+    left: 0px;
     right: 0px;
     top: 0px;
     z-index: 2;
@@ -16,10 +14,9 @@ body {
     background-image: url("salmonBackground.jpg");
     color: rgb(231, 223, 203);
     padding: 0px;
-    height: 1000px;
+    height: 1200px;
+    position: relative;
 }
-
-
 
 main {
     display: block;
@@ -29,14 +26,77 @@ main {
     left: -10px;
 }
 
-fieldset {
-    padding: 5px;
+footer {
+    position: absolute;
+    bottom: 0;
+    height: auto;
+    width: 100%;
+}
+
+p {
+    font-size: 15px;
+    margin: 5px;
+}
+
+a {
+    color: rgb(231, 223, 203);
+    font-size: 30px;
+}
+
+ul {
+    background: rgba(105, 105, 96, 0.733);
+    border: 2px solid rgba(228, 228, 207, 0.35);
+    border-radius: 7px;
+    margin: 10px;
+}
+
+img.small {
+    width: 100px;
+}
+
+img.med {
+    width: 160px;
+}
+
+img.big {
+    width: 220px;
 }
 
 
+img.resize {
+    height: auto;
+    padding: 5px;
+}
+
+.merch {
+    border: 3px solid grey;
+    border-radius: 5px;
+    display: block;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.menuList {
+    font-size: 30px;
+    list-style-type: decimal;
+    overflow: hidden;
+}
+
+.menuLi {
+    padding-left: 20px;
+}
+
+img.floatLeft {
+    float: left;
+}
 
 h1 {
-    text-align: center;
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: top;
 }
 
 h2 {
@@ -50,47 +110,48 @@ h2 {
     text-align: center;
 }
 
-form {
-    padding: 5px;
+
+/* styling for menu bar */
+.menu {
+    float: right;
 }
 
-label {
-    background: rgba(228, 228, 207, 0.705);
-    border: 2px solid black;
-    border-radius: 5px;
-    color: darkslategray;
-    display: block;
-    margin: 10px;
-    padding: 5px;
-    text-align: center;
-    width: min-content;
+.menuBar {
+    color: rgb(231, 223, 203);
+    display: inline;
+    margin: 2px; 
 }
 
-input.submitButton {
-    background-color: grey;
-    border-radius: 5px;
-    margin-left: 55px;
-
+.divider {
+    border-left: 2px solid rgba(228, 228, 207, 0.705);
+    display: inline;
 }
 
-input.submitButton:hover {
-    background-color: salmon;
-}
-
-div {
-    display: inline-block;
-}
-
+/* content boxes */
 .contentBox {
     background: rgba(47, 79, 79, 0.671);
     border: 2px solid rgba(150, 147, 147, 0.829);
     border-radius: 5px;
     margin: 10px;
     padding: 5px;
-    width: 100%;
 }
 
+.contentBlock {
+    display: block;
+    margin: 10px;
+}
 
+.column1 {
+    float: left;
+    width: 80%;
+}
+
+.column2 {
+    float: left;
+    width: 20%;
+}
+
+/* table styling for sales.html */
 .tableDiv {
     background: rgba(228, 228, 207, 0.705);
     border: rgba(228, 228, 207, 0.705);
@@ -122,8 +183,6 @@ th {
     width: min-content;
 }
 
-
-
 td:hover {
     background: rgb(231, 162, 162);
 }
@@ -132,9 +191,38 @@ th, td {
     height: 40px;
 }
 
-
 .totaltotal {
     color: white;
     background-color: rgb(103, 134, 134);
 }
 
+input.submitButton {
+    background-color: grey;
+    border-radius: 5px;
+    margin-left: 55px;
+
+}
+
+input.submitButton:hover {
+    background-color: salmon;
+}
+
+form {
+    padding: 5px;
+}
+
+fieldset {
+    padding: 5px;
+}
+
+label {
+    background: rgba(228, 228, 207, 0.705);
+    border: 2px solid black;
+    border-radius: 5px;
+    color: darkslategray;
+    display: block;
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+    width: min-content;
+}

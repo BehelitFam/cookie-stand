@@ -38,6 +38,10 @@ p {
     margin: 5px;
 }
 
+footer p {
+    text-align: center;
+}
+
 a {
     color: rgb(231, 223, 203);
     font-size: 30px;
